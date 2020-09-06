@@ -1,0 +1,96 @@
+.main-profile-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.container {
+	margin-bottom: 2rem;
+}
+
+.profile-container {
+    /* border: 1px solid red; */
+    background-color: #99ffff36;
+    border-radius: 10%;
+	height: 30vh;
+	width: 50%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-container svg {
+    height: 1.5rem;
+	width: 1.5rem;
+	position: relative;
+    top: 10px;
+    left: 15px;
+    margin-right: 1rem;
+    color: rgb(9, 196, 196);
+}
+
+.profile-data {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.profile-data img {
+	height: 7rem;
+	border-radius: 50%;
+}
+
+.profile-data h2,
+.profile-data h3 {
+	margin: 0;
+}
+
+.profile-data h3 {
+    margin: 0;
+    color: 	#909090;
+}
+
+.profile-data h2 {
+    margin: 0;
+    color: 	#181818;
+}
+
+.profile-follow-centre{
+    align-items: center;
+}
+
+.profile-follow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid red;
+}
+
+#profile-follow {
+    width:100%;
+    text-align:center;
+}
+
+#left {
+    float:left;
+    width:33%;
+    
+}
+
+#center {
+    display: inline-block;
+    margin:0 auto;
+    width:33%;
+}
+
+#right {
+    float:right;
+    width:33%;
+}
+
+
+
+
+.post-card {
+	display: flex;
+	flex-direction: row;
+}

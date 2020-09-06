@@ -1,0 +1,28 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+#main {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	background-color: rgb(255, 255, 255);
+	height: 100vh;
+	
+}
+
+#content-area{
+	width: 50%;
+}
+
+
+#navbar-area{
+	width: 20%;
+	top: 0;
+	height: 100vh;
+}
+
+.blank-area{
+	width: 20%;
+}

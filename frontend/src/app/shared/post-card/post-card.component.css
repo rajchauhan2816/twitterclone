@@ -1,0 +1,43 @@
+.post-card{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 1px solid rgba(101, 119, 134,0.2);
+    padding: 1rem;
+}
+
+.profile-img {
+  height: 3rem;
+  border-radius: 50%;
+  margin: 1rem;
+}
+
+.post-user{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0 0 0;
+}
+
+.post-user svg {
+    position: relative;
+    top: 0.4rem;
+}
+
+.post-user h3 {
+    margin-bottom: 0;
+}
+
+#post-user-id {
+    color: rgb(101, 119, 134);
+}
+
+.post-interaction button{
+    border: none;
+    background-color: transparent;
+    margin-right: 2rem;
+    padding: 0.2rem 0 0 0;
+}
+
+.post-body {
+    font-size: medium;
+}

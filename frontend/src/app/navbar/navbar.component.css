@@ -1,0 +1,54 @@
+#contain-navbar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+}
+
+.white-area{
+  width: 5rem;
+  /* border: 1px solid green; */
+  height: 100vh;
+  
+}
+
+#navbar {
+  /* display: inline-block; */
+  width: fit-content;
+  margin: auto;
+  margin-top: 5rem;
+  list-style: none;
+  
+}
+
+.navbar-group{
+  list-style: none;
+  
+}
+
+.nav-item{
+  padding-bottom: 1rem;
+}
+
+.nav-item a svg {
+	height: 1.5rem;
+	width: 1.5rem;
+	position: relative;
+	top: -4px;
+  margin-right: 1rem;
+  
+}
+
+.nav-item a h1 {
+  display: inline-block;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 800px) {
+  
+  .white-area{
+  width: 0rem;
+  /* border: 1px solid green; */
+  height: 100vh;
+  
+}
+}

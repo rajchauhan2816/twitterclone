@@ -1,0 +1,11 @@
+<div id="main">
+    <div id="navbar-area" >
+        <app-navbar *ngIf="!isAuthenticated"></app-navbar>
+    </div>
+    <div id="content-area">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="blank-area">
+
+    </div>
+</div>

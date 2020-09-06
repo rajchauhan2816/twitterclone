@@ -31,7 +31,9 @@ export class AuthService {
 			access_token: this.jwtService.sign(payload),
 			refresh_token: this.jwtService.sign(payload, {
 				expiresIn: '30d'
-			})
+			}),
+			iat: Date.now(),
+			exp: Date.now() + 60 * 60 * 1000
 		};
 	}
 }

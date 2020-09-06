@@ -1,0 +1,42 @@
+.profile-img {
+	height: 3rem;
+	border-radius: 50%;
+	margin: 1rem;
+}
+
+.post-right{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.add-post{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgba(101, 119, 134,0.2);
+    border-bottom: 3px solid rgba(101, 119, 134,0.2);
+    width: 100%;
+}
+
+.post-input {
+  display: inline-block;
+  /* border: solid 1px rgba(101, 119, 134,0.4); */
+  min-height: 50px;
+  width: 95%;
+  background-color: rgb(238, 242, 247);
+  margin-top: 1rem;
+}
+
+.post-input:active{
+    border: none;
+}
+
+#submit-post{
+    margin-top: 1rem;
+}
+
+#submit-post svg{
+    position: relative;
+    top: -2px;
+}

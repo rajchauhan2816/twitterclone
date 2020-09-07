@@ -1,3 +1,6 @@
+import { AuthGuard } from './auth/auth.guard';
+import { ReplyComponent } from './shared/reply/reply.component';
+import { ExploreComponent } from './explore/explore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -11,10 +14,17 @@ const routes: Routes = [
 	},
 	{
 		path: 'home',
-		component: HomeComponent
+		component: HomeComponent,
+		canActivate: [ AuthGuard ]
+	},
+	{
+		path: 'explore',
+		canActivate: [ AuthGuard ],
+		component: ExploreComponent
 	},
 	{
 		path: '**',
+		canActivate: [ AuthGuard ],
 		component: ProfileComponent
 	}
 ];

@@ -1,6 +1,6 @@
 <div id="main">
     <div id="navbar-area" >
-        <app-navbar *ngIf="!isAuthenticated"></app-navbar>
+        <app-navbar *ngIf="isAuthenticated"></app-navbar>
     </div>
     <div id="content-area">
         <router-outlet></router-outlet>

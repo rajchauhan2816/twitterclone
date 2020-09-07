@@ -1,32 +1,42 @@
 #contain-navbar {
-  position: fixed;
-  display: flex;
-  flex-direction: row;
+	position: fixed;
+	display: flex;
+	flex-direction: row;
 }
 
-.white-area{
-  width: 5rem;
-  /* border: 1px solid green; */
-  height: 100vh;
-  
+/* buttons */
+.btn-info {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 2px solid rgba(91, 192, 222, 0.75);
+  border-radius: 40px;
+  background: red;
+  transition: all 0.3s ease 0s;
+}
+
+.white-area {
+	width: 12rem;
+	/* border: 1px solid green; */
+	height: 100vh;
 }
 
 #navbar {
-  /* display: inline-block; */
-  width: fit-content;
-  margin: auto;
-  margin-top: 5rem;
-  list-style: none;
-  
+	/* display: inline-block; */
+	width: fit-content;
+	margin: auto;
+	margin-top: 5rem;
+	list-style: none;
 }
 
-.navbar-group{
-  list-style: none;
-  
+.navbar-group {
+	list-style: none;
 }
 
-.nav-item{
-  padding-bottom: 1rem;
+.nav-item {
+	padding-bottom: 1rem;
 }
 
 .nav-item a svg {
@@ -34,21 +44,61 @@
 	width: 1.5rem;
 	position: relative;
 	top: -4px;
-  margin-right: 1rem;
-  
+	margin-right: 1rem;
 }
 
 .nav-item a h1 {
-  display: inline-block;
-  font-weight: bold;
+	display: inline-block;
+	font-weight: bold;
+}
+
+
+
+@media only screen and (max-width: 800px) {
+	.white-area {
+		width: 0rem;
+		/* border: 1px solid green; */
+		height: 100vh;
+	}
+}
+
+@media only screen and (max-width: 1400px) {
+	.white-area {
+		width: 6rem;
+		/* border: 1px solid green; */
+		height: 100vh;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.white-area {
+		width: 2.5rem;
+		/* border: 1px solid green; */
+		height: 100vh;
+	}
 }
 
 @media only screen and (max-width: 800px) {
-  
-  .white-area{
-  width: 0rem;
-  /* border: 1px solid green; */
-  height: 100vh;
-  
+	.white-area {
+		width: 5rem;
+		/* border: 1px solid green; */
+		height: 100vh;
+	}
+
+	.navbar-routes {
+		visibility: hidden;
+	}
 }
+
+@media only screen and (max-width: 550px) {
+	.white-area {
+		width: 2rem;
+		/* border: 1px solid green; */
+		height: 100vh;
+	}
+
+	.navbar-routes {
+		visibility: hidden;
+	}
 }
+

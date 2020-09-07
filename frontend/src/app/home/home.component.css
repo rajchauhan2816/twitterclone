@@ -1,3 +1,7 @@
-.create-post{
-    
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    border: 1px solid rgba(101, 119, 134,0.2);
+    margin: 0;
+    padding: 1rem;
 }

@@ -1,3 +1,5 @@
+import { take, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TokenModel } from './../tokes.models';
 import { AuthService } from './../auth.service';
@@ -11,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 	isLoading = false;
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router) {}
 
 	ngOnInit(): void {}
 
@@ -27,10 +29,9 @@ export class LoginComponent implements OnInit {
 		this.isLoading = true;
 		authObs = this.authService.login(username, password);
 		authObs.subscribe(
-			(resData) => {
-				console.log(resData);
+			(_) => {
 				this.isLoading = false;
-				console.log(resData);
+				this.router.navigate([ '/home' ]);
 			},
 			(errorMessage) => {
 				console.log(errorMessage);

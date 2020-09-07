@@ -1,6 +1,6 @@
-import { tap, take } from 'rxjs/operators';
+import { tap, take, map } from 'rxjs/operators';
 import { AuthService } from './auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
@@ -11,13 +11,20 @@ export class AppComponent implements OnInit {
 	title = 'twitterclone';
 
 	isAuthenticated = false;
+
 	constructor(private authService: AuthService) {}
 	ngOnInit(): void {
+		this.authService.autoLogin();
 		this.authService.tokens.pipe(
 			take(1),
-			tap((tokens) => {
-				this.isAuthenticated = !!tokens;
+			tap((user) => {
+				const isAuth = !!user;
+				if (isAuth) {
+					this.isAuthenticated = true;
+				} else {
+					this.isAuthenticated = false;
+				}
 			})
-		);
+		).subscribe();
 	}
 }

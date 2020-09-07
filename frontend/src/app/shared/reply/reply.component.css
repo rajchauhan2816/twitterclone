@@ -1,0 +1,75 @@
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.75);
+	z-index: 50;
+}
+
+.alert-box {
+	position: fixed;
+	top: 30vh;
+	left: 25vw;
+	width: 50vw;
+	padding: 16px;
+	z-index: 100;
+	background: white;
+	box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
+}
+
+.alert-box-actions {
+	text-align: right;
+}
+
+.close-reply {
+	display: flex;
+	/* justify-content: space-between; */
+    flex-direction: row-reverse;
+    cursor: pointer;
+}
+
+.close-reply svg {
+	height: 1.2rem;
+	width: 1.2rem;
+	position: relative;
+	top: -2px;
+    color: rgb(9, 196, 196);
+    
+}
+
+
+.btn-info {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 2px solid rgba(91, 192, 222, 0.75);
+  border-radius: 40px;
+  background: rgba(91, 192, 222, 0.75);
+  transition: all 0.3s ease 0s;
+}
+
+.btn-info:hover {
+  color: rgba(91, 192, 222, 0.75);
+  background: transparent;
+  border: 2px solid rgba(91, 192, 222, 0.75);
+}
+
+.btn-info svg {
+    position: relative;
+    top: -2px;
+    left: 2px;
+}
+
+.post-input {
+  display: inline-block;
+  /* border: solid 1px rgba(101, 119, 134,0.4); */
+  min-height: 50px;
+  width: 95%;
+  background-color: rgb(238, 242, 247);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

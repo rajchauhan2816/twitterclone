@@ -21,6 +21,9 @@ export class SocialService {
 		if (follower) throw new HttpException('Already Followed', 409);
 
 		follower = await this.followerModel.create({ fromUser: fromUser._id, toUser: toUser._id });
+		toUser.followersCount++;
+		fromUser.followingCount++;
+		await Promise.all([ toUser.save(), fromUser.save() ]);
 		return follower;
 	}
 
@@ -32,19 +35,23 @@ export class SocialService {
 
 		const follower = await this.followerModel.findOneAndDelete({ fromUser: fromUser._id, toUser: toUser._id });
 		if (!follower) throw new HttpException('You are not a Follower', 400);
+		//
+		toUser.followersCount--;
+		fromUser.followingCount--;
+		await Promise.all([ toUser.save(), fromUser.save() ]);
 
 		return follower;
 	}
 
 	async findFollowers(username: string) {
 		const user = await this.userModel.findOne({ username });
-        const followers = await this.followerModel.find({ toUser: user._id });
-        return followers;
+		const followers = await this.followerModel.find({ toUser: user._id });
+		return followers;
 	}
 
 	async findFollowing(username: string) {
-        const user = await this.userModel.findOne({ username });
-        const following = await this.followerModel.find({ fromUser: user._id });
-        return following;
-    }
+		const user = await this.userModel.findOne({ username });
+		const following = await this.followerModel.find({ fromUser: user._id });
+		return following;
+	}
 }

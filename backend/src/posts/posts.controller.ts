@@ -10,23 +10,23 @@ import { Controller, Get, Post, Body, UseGuards, Request, Delete, Param } from '
 export class PostsController {
 	constructor(private postService: PostsService) {}
 
-	@Post('add')
+	@Post()
 	add(@Body() postDto: CreatePostDTO, @Request() { user }: ICurrentUser) {
 		return this.postService.addPost(postDto.body, user.username);
 	}
 
 	@Get()
-	findAll() {
-		return this.postService.findAll();
+	findAll(@Request() { user }: ICurrentUser) {
+		return this.postService.findAll(user.username);
 	}
 
 	@Delete(':id')
 	delete(@Param() { id }) {
-        return this.postService.deletePost(id);
-    }
+		return this.postService.deletePost(id);
+	}
 
-    @Get(':id')
+	@Get(':id')
 	findOne(@Param() { id }) {
-        return this.postService.findOne(id);
-    }
+		return this.postService.findOne(id);
+	}
 }

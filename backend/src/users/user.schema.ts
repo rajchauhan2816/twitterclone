@@ -16,6 +16,15 @@ export class User extends Document {
 	age: number;
 
 	@Prop() profilePicture?: string;
+
+	@Prop({ default: 0 })
+	likesCount?: number;
+
+	@Prop({ default: 0 })
+	followersCount?: number;
+
+	@Prop({ default: 0 })
+	followingCount?: number;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);

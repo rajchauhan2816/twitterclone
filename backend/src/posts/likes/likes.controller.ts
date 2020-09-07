@@ -16,7 +16,7 @@ export class LikesController {
 		}
 	}
 
-	@Delete(':id')
+	@Delete('/:id')
 	unlike(@Param() { id }) {
         return this.likeService.unlike(id);
     }

@@ -5,4 +5,6 @@ export class PostModel {
 	post: Post;
 	like: Like[];
 	comment: Comment[];
+	isLiked: boolean;
+	myLike?: Like; 
 }

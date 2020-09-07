@@ -1,6 +1,5 @@
 import { API_URL } from './../constant';
 import { TokenModel } from './tokes.models';
-import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -39,7 +38,13 @@ export class AuthService {
 			.pipe(
 				catchError(this.handleError),
 				tap((resData) => {
-					this.handleAuthentication(resData.access_token, resData.refresh_token, +resData.exp, +resData.iat);
+					this.handleAuthentication(
+						resData.username,
+						resData.access_token,
+						resData.refresh_token,
+						+resData.exp,
+						+resData.iat
+					);
 				})
 			);
 	}
@@ -49,15 +54,15 @@ export class AuthService {
 		if (!tokenData) {
 			return;
 		}
-
+		this.tokens.next(tokenData);
 		const expirationDuration = new Date(tokenData.exp).getTime() - new Date().getTime();
-		this.autoLogout(expirationDuration);
+		// this.autoLogout(expirationDuration);
 	}
 
 	logout(): void {
 		this.tokens.next(null);
 		this.router.navigate([ '/auth/login' ]);
-		localStorage.removeItem('userData');
+		localStorage.removeItem('tokenData');
 		if (this.tokenExpirationTimer) {
 			clearTimeout(this.tokenExpirationTimer);
 		}
@@ -70,19 +75,27 @@ export class AuthService {
 		}, expirationDuration);
 	}
 
-	private handleAuthentication(access_token: string, refresh_token: string, exp: number, iat: number): void {
+	private handleAuthentication(
+		username: string,
+		access_token: string,
+		refresh_token: string,
+		exp: number,
+		iat: number
+	): void {
 		const expirationDate = new Date(new Date().getTime() + exp * 1000);
 
 		this.tokens.next({
+			username,
 			access_token,
 			refresh_token,
 			exp,
 			iat
 		});
-		this.autoLogout(exp * 1000);
+		// this.autoLogout(exp * 1000);
 		localStorage.setItem(
 			'tokenData',
 			JSON.stringify({
+				username,
 				access_token,
 				refresh_token,
 				exp,

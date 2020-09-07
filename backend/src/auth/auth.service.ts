@@ -7,7 +7,7 @@ export class AuthService {
 	constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
 	async validateUser(username: string, pass: string): Promise<any> {
-		const user = await this.usersService.findOne(username);
+		const user = await (await this.usersService.findOne(username)).toObject();
 
 		if (user && (await compare(pass, user.password))) {
 			const { password, ...result } = user;
@@ -28,6 +28,7 @@ export class AuthService {
 
 	private async _generateTokens(payload: any) {
 		return {
+			username: payload.username,
 			access_token: this.jwtService.sign(payload),
 			refresh_token: this.jwtService.sign(payload, {
 				expiresIn: '30d'

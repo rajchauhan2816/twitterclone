@@ -7,14 +7,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Post } from './schemas/post.schema';
 import { Model } from 'mongoose';
 import { exception } from 'console';
+import { _toObjectId } from 'src/helpers/objectid.helper';
 
 @Injectable()
 export class PostsService {
 	constructor(
 		@InjectModel('user') private userModel: Model<User>,
 		@InjectModel('post') private postModel: Model<Post>,
-        @InjectModel('comment') private commentModel: Model<Comment>,
-        @InjectModel('like') private likeModel: Model<Like>,
+		@InjectModel('comment') private commentModel: Model<Comment>,
+		@InjectModel('like') private likeModel: Model<Like>
 	) {}
 
 	async addPost(body: string, username: string) {
@@ -26,7 +27,8 @@ export class PostsService {
 		return post;
 	}
 
-	async findAll() {
+	async findAll(username: string) {
+		const user = await this.userModel.findOne({ username });
 		const result: PostModel[] = [];
 		const posts = await this.postModel.find();
 		for (const post of posts) {
@@ -34,11 +36,21 @@ export class PostsService {
 				content: post._id,
 				type: 'post'
 			});
+
+			let isLiked = false;
+
+			const mylike = await this.likeModel.findOne({ content: post._id, user: user._id });
+			if (mylike) {
+				isLiked = true;
+			}
+
 			const comment = await this.commentModel.find({
 				content: post._id,
 				type: 'post'
 			});
 			result.push({
+				myLike: mylike ? mylike.toObject() : null,
+				isLiked,
 				post,
 				like,
 				comment
@@ -47,15 +59,15 @@ export class PostsService {
 		return result;
 	}
 
-	async findOne(postId: string){
-        const post = await this.postModel.findById(postId);
-        if(!post) throw new NotFoundException();
-        return post;
+	async findOne(postId: string) {
+		const post = await this.postModel.findById(postId);
+		if (!post) throw new NotFoundException();
+		return post;
 	}
-	
-	async deletePost(postId: string){
+
+	async deletePost(postId: string) {
 		const post = await this.postModel.findByIdAndDelete(postId);
-		if(!post) throw new NotFoundException();
-        return post;
+		if (!post) throw new NotFoundException();
+		return post;
 	}
 }

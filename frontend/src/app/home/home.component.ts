@@ -1,24 +1,25 @@
 import { HomeService } from './home.service';
 import { IPost, IPostData } from './../Interface/post.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
-@Component({
+@Component({ 
 	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrls: [ './home.component.css' ]
 })
 export class HomeComponent implements OnInit {
-	cnt: number[] = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
 
-	posts$: Observable<IPostData[]>;
+	postsSub: Subscription;
+
+	posts: IPostData[];
 
 	constructor(private homeService: HomeService) {}
 
 	ngOnInit(): void {
-		this.posts$ = this.homeService.fetchAllPost();
-		this.posts$.subscribe((postarr) => {
-			console.log(postarr);
+		this.postsSub = this.homeService.postAdded.subscribe((posts: IPostData[]) => {
+			this.posts = posts;
 		});
+		this.homeService.fetchAllPost().subscribe();
 	}
 }

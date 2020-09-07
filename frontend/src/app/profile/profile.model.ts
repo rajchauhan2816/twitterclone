@@ -1,7 +1,5 @@
-export interface IUser {
+export interface IProfile {
 	username: string;
-
-	password: string;
 
 	name: string;
 
@@ -15,4 +13,5 @@ export interface IUser {
 
 	followingCount?: number;
 
+	postCount?: number;
 }

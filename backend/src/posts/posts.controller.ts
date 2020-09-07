@@ -1,7 +1,7 @@
 import { LikeDTO } from './dtos/like.dto';
 import { ICurrentUser } from './../auth/currentuser';
 import { PostsService } from './posts.service';
-import { CreatePostDTO } from './dtos/post.dto';
+import { CreatePostDTO, GetPostDTO } from './dtos/post.dto';
 import { JwtAuthGuard } from './../auth/jwt-auth.guard';
 import { Controller, Get, Post, Body, UseGuards, Request, Delete, Param } from '@nestjs/common';
 
@@ -15,9 +15,19 @@ export class PostsController {
 		return this.postService.addPost(postDto.body, user.username);
 	}
 
-	@Get()
-	findAll(@Request() { user }: ICurrentUser) {
-		return this.postService.findAll(user.username);
+	@Get(':params')
+	findAll(@Param('params') params: any, @Request() { user }: ICurrentUser) {
+		const paramsJson = JSON.parse(params);
+		if(paramsJson.type == 'explore'){
+			return this.postService.findAll(user.username);
+		}
+		if(paramsJson.type == 'home'){
+			return this.postService.findHomePost(user.username);
+		}
+		if(paramsJson.type == 'profile'){
+			return this.postService.findmyPost(user.username);
+		}
+		
 	}
 
 	@Delete(':id')
@@ -25,8 +35,8 @@ export class PostsController {
 		return this.postService.deletePost(id);
 	}
 
-	@Get(':id')
-	findOne(@Param() { id }) {
-		return this.postService.findOne(id);
-	}
+	// @Get(':id')
+	// findOne(@Param() { id }) {
+	// 	return this.postService.findOne(id);
+	// }
 }

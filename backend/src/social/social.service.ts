@@ -38,7 +38,7 @@ export class SocialService {
 		//
 		toUser.followersCount--;
 		fromUser.followingCount--;
-		await Promise.all([ toUser.save(), fromUser.save() ]);
+		Promise.all([ toUser.save(), fromUser.save() ]);
 
 		return follower;
 	}

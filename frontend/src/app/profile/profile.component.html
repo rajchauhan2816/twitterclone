@@ -11,29 +11,30 @@
             <div class="profile-data">
 
                 <img src="https://pbs.twimg.com/profile_images/1187422693806596097/KdmptJFf_400x400.jpg" alt="profile">
-                <h2>Raj Kumar Chauhan</h2>
-                
-                <h3>@rexofficial</h3>
+                <h2>{{(profile$ |async)?.name}}</h2>
+
+                <h3>@{{(profile$ |async)?.username}}</h3>
             </div>
 
             <div id="profile-follow">
                 <div id="left">
                     <h2>Posts</h2>
-                    <h2>182</h2>
+                    <h2>{{(profile$ |async)?.postCount}}</h2>
                 </div>
                 <div id="center">
                     <h2>Followes</h2>
-                    <h2>795</h2>
+                    <h2>{{(profile$ |async)?.followersCount}}</h2>
                 </div>
                 <div id="right">
                     <h2>Following</h2>
-                    <h2>104</h2>
+                    <h2>{{(profile$ |async)?.followingCount}}</h2>
                 </div>
             </div>
 
         </div>
     </div>
-    <div class="post-card" *ngFor="let item of cnt">
-        <app-post-card></app-post-card>
-    </div>
+    
+</div>
+<div class="post-card" *ngFor="let item of (post$|async)">
+    <app-post-card [post]="item"></app-post-card>
 </div>

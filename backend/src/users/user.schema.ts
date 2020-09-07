@@ -25,6 +25,9 @@ export class User extends Document {
 
 	@Prop({ default: 0 })
 	followingCount?: number;
+
+	@Prop({ default: 0 })
+	postCount?: number;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);

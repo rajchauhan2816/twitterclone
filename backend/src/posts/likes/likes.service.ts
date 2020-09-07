@@ -39,7 +39,7 @@ export class LikesService {
         const post = await this.postModel.findById(like.content);
         const postUser = await this.userModel.findById( post.user );
         postUser.likesCount--;
-        await postUser.save();
+        postUser.save();
 		return like;
 	}
 }

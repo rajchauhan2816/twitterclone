@@ -8,7 +8,11 @@ import { Component } from '@angular/core';
 	styleUrls: [ './navbar.component.css' ]
 })
 export class NavbarComponent {
-	constructor(private authService: AuthService, private router: Router) {}
+	username: string;
+
+	constructor(private authService: AuthService, private router: Router) {
+		this.authService.tokens.subscribe((val) => (this.username = val.username));
+	}
 	onClick(): void {
 		this.authService.logout();
 		this.authService.tokens.next(null);

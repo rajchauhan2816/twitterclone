@@ -23,7 +23,7 @@ const routes: Routes = [
 		component: ExploreComponent
 	},
 	{
-		path: '**',
+		path: ':username',
 		canActivate: [ AuthGuard ],
 		component: ProfileComponent
 	}

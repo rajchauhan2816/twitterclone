@@ -5,6 +5,8 @@ export interface IPost {
 	body: string;
 
 	user: IUser;
+
+	createdAt: string;
 }
 
 export interface IPostData {

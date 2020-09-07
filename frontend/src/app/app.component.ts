@@ -1,4 +1,3 @@
-import { tap, take, map } from 'rxjs/operators';
 import { AuthService } from './auth/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -15,16 +14,9 @@ export class AppComponent implements OnInit {
 	constructor(private authService: AuthService) {}
 	ngOnInit(): void {
 		this.authService.autoLogin();
-		this.authService.tokens.pipe(
-			take(1),
-			tap((user) => {
-				const isAuth = !!user;
-				if (isAuth) {
-					this.isAuthenticated = true;
-				} else {
-					this.isAuthenticated = false;
-				}
-			})
-		).subscribe();
+		this.authService.isAuthenticatedObs.subscribe((val) => {
+			console.log(val);
+			this.isAuthenticated = val;
+		});
 	}
 }

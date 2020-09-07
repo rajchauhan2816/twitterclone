@@ -83,3 +83,27 @@ h2 {
 	display: flex;
 	flex-direction: row;
 } */
+
+.btn-info {
+  font-family: Raleway-SemiBold;
+  font-size: 13px;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 2px solid rgba(91, 192, 222, 0.75);
+  border-radius: 40px;
+  background: rgba(91, 192, 222, 0.75);
+  transition: all 0.3s ease 0s;
+}
+
+.btn-info:hover {
+  color: rgba(91, 192, 222, 0.75);
+  background: transparent;
+  border: 2px solid rgba(91, 192, 222, 0.75);
+}
+
+.follow-button{
+	display: flex;
+	flex-direction: row-reverse;
+	margin-right: 1rem;
+}

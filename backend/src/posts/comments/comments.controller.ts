@@ -9,6 +9,11 @@ import { CommentsService } from './comments.service';
 export class CommentsController {
 	constructor(private commentsService: CommentsService) {}
 
+	@Get(':id')
+	getComments(@Param() { id }){
+		return this.commentsService.findAllComments(id);
+	}
+
 	@Get('replies/:id')
 	getReplies(@Param() { id }){
 		return this.commentsService.findAllReplies(id);

@@ -55,4 +55,9 @@ export class CommentsService {
 		const replies = this.commentModel.find({ content: _toObjectId(commentId), type: 'comment' });
 		return replies;
 	}
+
+	async findAllComments(postId: string) {
+		const replies = this.commentModel.find({ content: _toObjectId(postId), type: 'post' });
+		return replies;
+	}
 }

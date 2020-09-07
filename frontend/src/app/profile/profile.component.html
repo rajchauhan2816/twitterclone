@@ -8,33 +8,39 @@
                 <path fill-rule="evenodd"
                     d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
             </svg>
+            <div class="follow-button">
+                <div *ngIf="!showBtn">
+                    <button *ngIf="!isfollowed" (click)="follow()" type="button" class="btn btn-info" id="submit-post">Follow</button>
+                    <button *ngIf="isfollowed" (click)="unfollow()" type="button" class="btn btn-info" id="submit-post">Followed</button></div>
+            </div>
             <div class="profile-data">
 
                 <img src="https://pbs.twimg.com/profile_images/1187422693806596097/KdmptJFf_400x400.jpg" alt="profile">
-                <h2>{{(profile$ |async)?.name}}</h2>
+                <h2>{{profile?.name}}</h2>
 
-                <h3>@{{(profile$ |async)?.username}}</h3>
+                <h3>@{{profile?.username}}</h3>
             </div>
 
             <div id="profile-follow">
                 <div id="left">
                     <h2>Posts</h2>
-                    <h2>{{(profile$ |async)?.postCount}}</h2>
+                    <h2>{{profile?.postCount}}</h2>
                 </div>
                 <div id="center">
                     <h2>Followes</h2>
-                    <h2>{{(profile$ |async)?.followersCount}}</h2>
+                    <h2>{{followersCount}}</h2>
                 </div>
                 <div id="right">
                     <h2>Following</h2>
-                    <h2>{{(profile$ |async)?.followingCount}}</h2>
+                    <h2>{{profile?.followingCount}}</h2>
                 </div>
             </div>
 
         </div>
     </div>
-    
+
 </div>
-<div class="post-card" *ngFor="let item of (post$|async)">
+<h1 *ngIf="isLoading">Loading...</h1>
+<div class="post-card" *ngFor="let item of posts?.slice().reverse()">
     <app-post-card [post]="item"></app-post-card>
 </div>

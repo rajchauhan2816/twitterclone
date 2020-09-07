@@ -9,9 +9,15 @@
             <input type="password" id="password" class="form-control" ngModel name="password" required minlength="1" />
         </div>
         <div>
+            <hr>
             <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">
                 Login
             </button>
+            |
+            <button (click)="goSignup()" class="btn btn-primary" type="submit" [disabled]="!authForm.valid">
+                Go to SignUp
+            </button>
+
         </div>
     </form>
 </div>

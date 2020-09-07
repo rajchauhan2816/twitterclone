@@ -1,4 +1,5 @@
-import { HomeService } from './../../home/home.service';
+import { HomePosts } from './../../home/home.action';
+import { Store } from '@ngxs/store';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePostComponent implements OnInit {
 	body: string;
-	constructor(private homeService: HomeService) {}
+	constructor(private store: Store) {}
 
 	ngOnInit(): void {}
 
-	addPost() {
-		this.homeService.addPost(this.body).subscribe((post) => console.log(post));
+	addPost(): void {
+		this.store.dispatch(new HomePosts.AddPost(this.body));
 	}
 }

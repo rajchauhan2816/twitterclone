@@ -54,4 +54,16 @@ export class SocialService {
 		const following = await this.followerModel.find({ fromUser: user._id });
 		return following;
 	}
+
+	async isfollow(fromUsername: string, toUsername: string){
+		const toUser = await this.userModel.findOne({ username: toUsername });
+		const fromUser = await this.userModel.findOne({ username: fromUsername });
+
+		const follow = await this.followerModel.findOne({toUser:toUser._id, fromUser:fromUser._id});
+
+		if(!follow){
+			return false;
+		}
+		return true;
+	}
 }

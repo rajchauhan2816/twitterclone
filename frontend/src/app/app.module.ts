@@ -1,3 +1,7 @@
+import { ReplyState } from './shared/reply/reply.state';
+import { ProfileState, ProfilePostState } from './profile/profile.state';
+import { HomeState } from './home/home.state';
+import { AuthState } from './auth/auth.state';
 import { AuthInterceptorService } from './auth/auth.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -24,6 +28,8 @@ import { PostCardComponent } from './shared/post-card/post-card.component';
 import { CreatePostComponent } from './shared/create-post/create-post.component';
 import { ReplyComponent } from './shared/reply/reply.component';
 import { PostCardReplyComponent } from './shared/post-card-reply/post-card-reply.component';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 @NgModule({
 	declarations: [
@@ -51,7 +57,11 @@ import { PostCardReplyComponent } from './shared/post-card-reply/post-card-reply
 		MatListModule,
 		NgbModule,
 		HttpClientModule,
-		FormsModule
+		FormsModule,
+		NgxsModule.forRoot([ AuthState, HomeState, ProfileState, ProfilePostState, ReplyState ], {
+			developmentMode: true
+		}),
+		NgxsRouterPluginModule.forRoot()
 	],
 	providers: [
 		{

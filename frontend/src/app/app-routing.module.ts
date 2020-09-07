@@ -1,5 +1,5 @@
+import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './auth/auth.guard';
-import { ReplyComponent } from './shared/reply/reply.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
@@ -8,9 +8,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
+	{ path: '', redirectTo: '/home', pathMatch: 'full' },
 	{
 		path: 'auth/login',
-		component: LoginComponent
+		component: LoginComponent,
+		canActivate: [ AuthGuard ]
+	},
+	{
+		path: 'auth/signup',
+		component: SignupComponent,
 	},
 	{
 		path: 'home',
@@ -24,6 +30,11 @@ const routes: Routes = [
 	},
 	{
 		path: ':username',
+		canActivate: [ AuthGuard ],
+		component: ProfileComponent
+	},
+	{
+		path: '**',
 		canActivate: [ AuthGuard ],
 		component: ProfileComponent
 	}

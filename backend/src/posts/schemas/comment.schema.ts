@@ -7,12 +7,14 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 export class Comment extends Document {
 	@Prop() id: Types.ObjectId;
 
-    @Prop({required: true}) content: Types.ObjectId;
+	@Prop({ required: true })
+	content: Types.ObjectId;
 
-    @Prop({required: true}) body: string;
+	@Prop({ required: true })
+	body: string;
 
-    @Prop({required: true}) type:string;
-    
+	@Prop({ required: true })
+	type: string;
 
 	@Prop({ required: true, ref: 'user', autopopulate: true })
 	user: Types.ObjectId;

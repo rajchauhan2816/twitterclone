@@ -103,39 +103,43 @@ export class PostsService {
 		return result;
 	}
 
-	async findmyPost(username: string) {
-		const user = await this.userModel.findOne({ username });
+	async findmyPost(username: string, otherUsername: string) {
+		try {
+			const user = await this.userModel.findOne({ username });
 
-		const result: PostModel[] = [];
-		const posts = await this.postModel.find({
-			user: user._id
-		});
-		for (const post of posts) {
-			const like = await this.likeModel.find({
-				content: post._id,
-				type: 'post'
+			const otherUser = await this.userModel.findOne({ username: otherUsername });
+
+			const result: PostModel[] = [];
+			const posts = await this.postModel.find({
+				user: otherUser._id
 			});
+			for (const post of posts) {
+				const like = await this.likeModel.find({
+					content: post._id,
+					type: 'post'
+				});
 
-			let isLiked = false;
+				let isLiked = false;
 
-			const mylike = await this.likeModel.findOne({ content: post._id, user: user._id });
-			if (mylike) {
-				isLiked = true;
+				const mylike = await this.likeModel.findOne({ content: post._id, user: user._id });
+				if (mylike) {
+					isLiked = true;
+				}
+
+				const comment = await this.commentModel.find({
+					content: post._id,
+					type: 'post'
+				});
+				result.push({
+					myLike: mylike ? mylike.toObject() : null,
+					isLiked,
+					post,
+					like,
+					comment
+				});
 			}
-
-			const comment = await this.commentModel.find({
-				content: post._id,
-				type: 'post'
-			});
-			result.push({
-				myLike: mylike ? mylike.toObject() : null,
-				isLiked,
-				post,
-				like,
-				comment
-			});
-		}
-		return result;
+			return result;
+		} catch (error) {}
 	}
 
 	async findOne(postId: string) {

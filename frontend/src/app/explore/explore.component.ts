@@ -10,10 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExploreComponent implements OnInit {
 	post$: Observable<IPostData[]>;
+	isLoading = true;
 	constructor(private exploreService: ExploreService) {}
 
 	ngOnInit(): void {
 		this.post$ = this.exploreService.fetchPost();
-		this.post$.subscribe();
+		this.post$.subscribe((val) => {
+			if (val) {
+				this.isLoading = false;
+			}
+		});
 	}
 }

@@ -1,25 +1,28 @@
-import { HomeService } from './home.service';
-import { IPost, IPostData } from './../Interface/post.model';
+import { HomeState, HomeStateModel } from './home.state';
+import { Store, Select } from '@ngxs/store';
+import { IPostData } from './../Interface/post.model';
 import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { HomePosts } from './home.action';
 
-@Component({ 
+@Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrls: [ './home.component.css' ]
 })
 export class HomeComponent implements OnInit {
-
-	postsSub: Subscription;
-
 	posts: IPostData[];
 
-	constructor(private homeService: HomeService) {}
+	isLoading = false;
+	@Select(HomeState) posts$: Observable<HomeStateModel>;
+
+	constructor(private store: Store) {}
 
 	ngOnInit(): void {
-		this.postsSub = this.homeService.postAdded.subscribe((posts: IPostData[]) => {
-			this.posts = posts;
+		this.store.dispatch(new HomePosts.GetAll('home'));
+		this.posts$.subscribe((val) => {
+			this.posts = val.posts;
+			this.isLoading = val.loading;
 		});
-		this.homeService.fetchAllPost().subscribe();
 	}
 }
